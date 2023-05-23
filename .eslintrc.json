@@ -1,31 +1,56 @@
 {
   "env": {
     "es6": true,
-    "commonjs": true,
-    "node": true
+    "commonjs": true
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:node/recommended"
+    "eslint:recommended"
   ],
   "parserOptions": {
     "ecmaVersion": 2021,
     "sourceType": "module"
   },
   "rules": {
-    "no-unused-vars": "off",
-    "max-statements": [
-      "error",
-      20
-    ],
-    "node/no-unsupported-features/es-syntax": [
-      "error",
-      {
-        "ignores": [
-          "modules"
-        ]
+    "max-statements": ["error", 20],
+    "no-unused-vars": "error"
+  },
+  "overrides": [
+    {
+      "files": ["**/client/**/*.js"],
+      "env": {
+        "browser": true,
+        "jest": true
+      },
+      "extends": ["plugin:react/recommended", "plugin:react-hooks/recommended"],
+      "plugins": ["react", "jest", "react-hooks"],
+      "settings": {
+        "react": {
+          "version": "detect"
+        }
+      },
+      "rules": {
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/react-in-jsx-scope": "off",
+        "jest/no-disabled-tests": "warn",
+        "jest/no-focused-tests": "error",
+        "jest/no-identical-title": "error",
+        "jest/prefer-to-have-length": "warn",
+        "jest/valid-expect": "error"
       }
-    ],
-    "node/no-deprecated-api": "error"
-  }
+    },
+    {
+      "files": ["**/server/**/*.js"],
+      "env": {
+        "node": true
+      },
+      "extends": ["plugin:node/recommended"],
+      "rules": {
+        "node/no-unsupported-features/es-syntax": ["error", {"ignores": ["modules"]}],
+        "node/no-deprecated-api": "error"
+      },
+      "parserOptions": {
+        "sourceType": "module"
+      }
+    }
+  ]
 }

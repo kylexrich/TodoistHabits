@@ -1,22 +1,36 @@
 {
-  "name": "server",
+  "name": "todoist-habits",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
+    "client": "cd client && npm start",
+    "server": "cd server && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "npm run server",
+    "heroku-postbuild": "cd client && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "postinstall": "cd server && npm install && cd ../client && npm install && cd ..",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "lint:fix": "eslint --fix .",
+    "prettier": "prettier --check .",
+    "lint-and-format": "npm run lint:fix && npm run format"
   },
   "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.40.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-jest": "^27.2.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^2.8.8",
+    "nodemon": "^2.0.22"
+  },
   "dependencies": {
-    "@doist/ui-extensions-core": "^4.2.0",
-    "axios": "^1.4.0",
-    "body-parser": "^1.20.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "mongoose": "^7.1.1",
-    "openai": "^3.2.1"
+    "concurrently": "^8.0.1"
   }
 }
